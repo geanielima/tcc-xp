@@ -1,0 +1,19 @@
+name: Execução de testes na pipeline
+
+on:
+  [push]
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout projeto
+        uses: actions/checkout@v2
+      
+      - name: Install dependecies
+        run: npm install 
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
+        with:
+          browser: firefox
