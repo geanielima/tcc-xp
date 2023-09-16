@@ -15,7 +15,7 @@ describe('Criação,Atualização e deleção de funcionário', () => {
     });
 
     it('Atualizar detalhes do funcionário', () => {
-        //cy.login('https://opensource-demo.orangehrmlive.com/web/index.php/pim/viewEmployeeList','Admin','admin123')
+        /cy.login('https://opensource-demo.orangehrmlive.com/web/index.php/pim/viewEmployeeList','Admin','admin123')
         cy.get(':nth-child(1) > .oxd-input-group > :nth-child(2) > .oxd-autocomplete-wrapper > .oxd-autocomplete-text-input > input').type('trabalho pratico devops')
         //cy.get('.oxd-autocomplete-option').click()
         cy.wait(1000)
