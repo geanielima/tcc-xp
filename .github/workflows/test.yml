@@ -25,7 +25,7 @@ jobs:
     #  run: npx cypress run
     - name: Executar testes
       run: |
-        if npm test; then
+        if npx cypress run; then
           echo "Testes bem-sucedidos."
         else
           echo "Testes falharam. Criando um issue no GitHub."
