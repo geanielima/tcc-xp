@@ -1,4 +1,4 @@
-name: Testes Automatizados
+name: Testes Automatizados 
 
 on:
   push:
@@ -21,5 +21,26 @@ jobs:
     - name: Instalar dependências
       run: yarn install
 
-    - name: Executar testes com Cypress
-      run: npx cypress run
+    #- name: Executar testes com Cypress
+    #  run: npx cypress run
+    - name: Executar testes
+      run: |
+        if npm test; then
+          echo "Testes bem-sucedidos."
+        else
+          echo "Testes falharam. Criando um issue no GitHub."
+          GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
+          REPO_OWNER=geanielima
+          REPO_NAME=tcc-xp
+          ISSUE_TITLE="Falha nos Testes Automatizados"
+          ISSUE_BODY="Os testes automatizados falharam na branch ${{ github.ref }}. Verifique os logs para detalhes."
+          
+          # Criação de um novo issue usando a API do GitHub
+          curl -X POST \
+            -H "Accept: application/vnd.github.v3+json" \
+            -H "Authorization: Bearer $GITHUB_TOKEN" \
+            https://api.github.com/repos/$REPO_OWNER/$REPO_NAME/issues \
+            -d "{\"title\":\"$ISSUE_TITLE\",\"body\":\"$ISSUE_BODY\"}"
+          
+          exit 1
+        fi
