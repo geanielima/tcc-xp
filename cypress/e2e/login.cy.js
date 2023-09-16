@@ -12,7 +12,7 @@ describe('Login no Orange HRM', () => {
         verificarCredencialInvalida()
     })
 
-    it.skip('Logout bem sucedido', () => {
+    it('Logout bem sucedido', () => {
         cy.login('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login','Admin','admin123')
         clicarPerfil()
         cy.wait(2000)
