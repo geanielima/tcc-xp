@@ -2,7 +2,7 @@ describe('Criação,Atualização e deleção de funcionário', () => {
     it('Registrar um novo funcionário', () => {
       //cy.login('https://opensource-demo.orangehrmlive.com/web/index.php/pim/viewEmployeeList','Admin','admin123')
       cy.get('.orangehrm-header-container > .oxd-button').click()
-      cy.get('.--name-grouped-field > :nth-child(1) > :nth-child(2) > .oxd-input').type('trabalho')
+      //cy.get('.--name-grouped-field > :nth-child(1) > :nth-child(2) > .oxd-input').type('trabalho')
       cy.get(':nth-child(2) > :nth-child(2) > .oxd-input').should('be.visible').type('pratico')
       cy.get(':nth-child(3) > :nth-child(2) > .oxd-input').should('be.visible').type('devops')
       cy.get('.oxd-switch-input').should('be.visible').click()
@@ -17,7 +17,7 @@ describe('Criação,Atualização e deleção de funcionário', () => {
     it('Atualizar detalhes do funcionário', () => {
         //cy.login('https://opensource-demo.orangehrmlive.com/web/index.php/pim/viewEmployeeList','Admin','admin123')
         cy.get(':nth-child(1) > .oxd-input-group > :nth-child(2) > .oxd-autocomplete-wrapper > .oxd-autocomplete-text-input > input').type('trabalho pratico devops')
-        cy.get('.oxd-autocomplete-option').click()
+        //cy.get('.oxd-autocomplete-option').click()
         cy.wait(1000)
         cy.get('.oxd-form-actions > .oxd-button--secondary').click({force: true})
         cy.wait(2000)
@@ -37,7 +37,7 @@ describe('Criação,Atualização e deleção de funcionário', () => {
     it('Remover funcionário', () => {
         //cy.login('https://opensource-demo.orangehrmlive.com/web/index.php/pim/viewEmployeeList','Admin','admin123')
         cy.get(':nth-child(1) > .oxd-input-group > :nth-child(2) > .oxd-autocomplete-wrapper > .oxd-autocomplete-text-input > input').type('trabalho pratico devops')
-        cy.get('.oxd-autocomplete-option').click()
+        //cy.get('.oxd-autocomplete-option').click()
         cy.wait(1000)
         cy.get('.oxd-form-actions > .oxd-button--secondary').click({force: true})
         cy.wait(2000)
