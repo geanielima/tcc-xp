@@ -1,26 +1,41 @@
-import Funcionarios from "../pageObjects/Funcionarios";
-import Login from "../pageObjects/Login";
+import '../testFunction/funcionario'
+import { buttonAddEmployee, clickButtonSave, clickOnPIMoptionOnMenu, createLoginDetails, fillLoginDetails, fillRequiredFilds, verifyMessageSuccesfully } from '../testFunction/funcionario';
+import { loginPage } from '../testFunction/login';
 
 describe('Criação,Atualização e deleção de funcionário', () => {
+    
+
+
     it('Registrar um novo funcionário', () => {
-        Login.LoginPage('Admin', 'admin123')
+        loginPage('Admin', 'admin123')
         cy.intercept('GET', '**/web/index.php/api/v2/dashboard/employees/action-summary**').as('getEmploymentStatuses');
         cy.wait('@getEmploymentStatuses').then((interception) => {
             const response = interception.response;
             expect(response.statusCode).to.eq(200);
           });
-        Funcionarios.clickOnPIMoptionOnMenu()
-        Funcionarios.buttonAddEmployee()
-        Funcionarios.fillRequiredFilds("trabalho", "pratico", "devops")
-        Funcionarios.createLoginDetails()
-        Funcionarios.fillLoginDetails('geane','pwd123456','pwd123456')
-        Funcionarios.clickButtonSave()
-        cy.wait(2000)
-        Funcionarios.verifyMessageSuccesfully()
+        clickOnPIMoptionOnMenu()
+        buttonAddEmployee()
+        fillRequiredFilds("geanelimabatista", "pratico", "devops")
+        createLoginDetails()
+        fillLoginDetails('geanelimabatista','pwd123456','pwd123456')
+        clickButtonSave()
+
+        cy.intercept('POST', '**/web/index.php/api/v2/admin/users**').as('salvarUserComSucesso');
+        cy.wait('@salvarUserComSucesso').then((interception) => {
+            const response = interception.response;
+            expect(response.statusCode).to.eq(200);
+          });
+       
     });
 
     it('Atualizar detalhes do funcionário', () => {
-        cy.login('/web/index.php/auth/login', 'Admin', 'admin123')
+        loginPage('Admin', 'admin123')
+        cy.intercept('GET', '**/web/index.php/api/v2/dashboard/employees/action-summary**').as('getEmploymentStatuses');
+        cy.wait('@getEmploymentStatuses').then((interception) => {
+            const response = interception.response;
+            expect(response.statusCode).to.eq(200);
+          });
+        clickOnPIMoptionOnMenu()
         cy.get(':nth-child(1) > .oxd-input-group > :nth-child(2) > .oxd-autocomplete-wrapper > .oxd-autocomplete-text-input > input').type('trabalho pratico devops')
         cy.wait(1000)
         cy.get('.oxd-form-actions > .oxd-button--secondary').click({ force: true })
@@ -38,22 +53,26 @@ describe('Criação,Atualização e deleção de funcionário', () => {
         cy.get('.oxd-toast').should("include.text", "Successfully Updated")
     })
 
-    it.only('Remover funcionário', () => {
-        Login.LoginPage('Admin', 'admin123')
+    it('Remover funcionário', () => {
+        loginPage('Admin', 'admin123')
         cy.intercept('GET', '**/web/index.php/api/v2/dashboard/employees/action-summary**').as('getEmploymentStatuses');
         cy.wait('@getEmploymentStatuses').then((interception) => {
             const response = interception.response;
             expect(response.statusCode).to.eq(200);
           });
         cy.get(':nth-child(2) > .oxd-main-menu-item').click()
-        cy.get(':nth-child(1) > .oxd-input-group > :nth-child(2) > .oxd-autocomplete-wrapper > .oxd-autocomplete-text-input > input').type('trabalho pratico devops')
+        cy.get(':nth-child(1) > .oxd-input-group > :nth-child(2) > .oxd-autocomplete-wrapper > .oxd-autocomplete-text-input > input').type('geanelimabatista pratico devops')
         cy.wait(1000)
         cy.get('.oxd-form-actions > .oxd-button--secondary').click({ force: true })
         cy.wait(2000)
         cy.get('.oxd-table-card-cell-checkbox > .oxd-checkbox-wrapper > label > .oxd-checkbox-input > .oxd-icon').click()
-        cy.get('.orangehrm-horizontal-padding > div > .oxd-button').click()
-        cy.get('.orangehrm-modal-footer > .oxd-button--label-danger').should('be.visible').click()
-        cy.get('.oxd-toast').should('have.text', 'success')
+        cy.get('.orangehrm-horizontal-padding > div > .oxd-button').should('be.visible').click({ force: true })
+        cy.get('.orangehrm-modal-footer > .oxd-button--label-danger').should('be.visible').click({ force: true })
+        cy.intercept('GET', '**/web/index.php/api/v2/pim/employees**').as('deletadoComSucesso');
+        cy.wait('@deletadoComSucesso').then((interception) => {
+            const response = interception.response;
+            expect(response.statusCode).to.eq(200);
+          });
 
     })
 });

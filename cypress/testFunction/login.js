@@ -1,29 +1,23 @@
-function clicarEmLogout(){
+export function clicarEmLogout(){
     cy.get(':nth-child(4) > .oxd-userdropdown-link').click()
 }
 
-function verificarTelaInicialLogin(){
+export function verificarTelaInicialLogin(){
     cy.get('.oxd-text--h5').contains('Login').should('be.visible')
 }
 
-function clicarPerfil(){
+export function clicarPerfil(){
     cy.get('.oxd-userdropdown-tab').click()
 }
 
-function verificarExibicaoPerfil(){
+export function loginPage(email,senha) {
+    cy.login('/web/index.php/auth/login', email,senha)
+}
+
+export function verificarExibicaoPerfil(){
     cy.get('.oxd-userdropdown-tab').should('be.visible')
 }
 
-function verificarCredencialInvalida(){
+export function verificarCredencialInvalida(){
     cy.get('.oxd-alert-content').contains('Invalid credentials').should('be.visible')
-}
-
-
-
-export {
-    verificarExibicaoPerfil,
-    clicarPerfil,
-    clicarEmLogout,
-    verificarTelaInicialLogin,
-    verificarCredencialInvalida
 }
