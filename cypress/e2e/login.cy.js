@@ -1,5 +1,5 @@
 import '../testFunction/login'
-import { verificarCredencialInvalida, clicarEmLogout, clicarPerfil, verificarCredencial, verificarExibicaoPerfil, verificarTelaInicialLogin } from '../testFunction/login';
+import { verificarCredencialInvalida, clicarEmLogout, clicarPerfil, verificarCredencial, verificarExibicaoPerfil, verificarTelaInicialLogin, loginPage } from '../testFunction/login';
 
 describe('Login no Orange HRM', () => {
     it('Realizar o login bem sucedido', () => {
