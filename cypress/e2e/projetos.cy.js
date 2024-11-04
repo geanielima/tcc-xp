@@ -2,14 +2,14 @@ import '../testFunction/projetos'
 import { addUmProjeto,clicarBotaoDeletar, clicarBotaoPesquisar, clicarBotaoVisualizar, clicarEmConfirmarDelecao, clicarEmMyInfo, clicarSaveButton, digitarNomeCliente, digitarNomeProjeto, procurarNomeProjeto, selecionarOpcao, verificarContactDetails, verificarPersonalDetails, verificarRemocaoComSucesso, verificarSeProjetoFoiCriadoComSucesso, verificarTelaDoCandidato } from '../testFunction/projetos';
 
 describe('Visualização de perfil e criação/deleção de projetos', () => {
-    it.skip('Visualizar meu perfil', () => {
+    it('Visualizar meu perfil', () => {
         cy.login('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login','Admin','admin123')
         clicarEmMyInfo()
         verificarPersonalDetails()
         verificarContactDetails()
     });
 
-    it.skip('Visualizar Perfil do candidato', () => {
+    it('Visualizar Perfil do candidato', () => {
         cy.login('https://opensource-demo.orangehrmlive.com/web/index.php/recruitment/viewCandidates','Admin','admin123')
         clicarBotaoVisualizar()
         verificarTelaDoCandidato()
@@ -17,7 +17,7 @@ describe('Visualização de perfil e criação/deleção de projetos', () => {
 
     
 
-    it.skip('Cadastrar um projeto', () => {
+    it('Cadastrar um projeto', () => {
         cy.login('https://opensource-demo.orangehrmlive.com/web/index.php/time/viewProjects','Admin','admin123')
         addUmProjeto()
         digitarNomeProjeto()
