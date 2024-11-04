@@ -19,7 +19,7 @@ jobs:
         node-version: 16
 
     - name: Instalar dependências
-      run: yarn install
+      run: npm install
 
     #- name: Executar testes com Cypress
     #  run: npx cypress run
